@@ -5,9 +5,13 @@ const itemRouter = require('./routers/item')
 const cartRouter = require('./routers/cart')
 const testimonialRouter = require('./routers/testimonial')
 const exclusiveRouter = require('./routers/exclusive')
+const cors = require('cors')
+
 // const adminRouter = require('./routers/admin')
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json()) //automatically parse the incoming json for us --> trasform it to object
 app.use('/uploads', express.static('uploads')) //makes the uploads folder available to everyone

@@ -3,9 +3,7 @@ const Item = require('../models/item')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 const multer = require('multer')
-const cors = require('cors')
 
-app.use(cors())
 
 const storage = multer.diskStorage({ //to specify where it will stored and what is it's name (the full path)
     destination: function(req, file, cb) {
