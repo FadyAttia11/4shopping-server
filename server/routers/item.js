@@ -3,6 +3,7 @@ const Item = require('../models/item')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 const multer = require('multer')
+const cors = require('cors')
 
 const storage = multer.diskStorage({ //to specify where it will stored and what is it's name (the full path)
     destination: function(req, file, cb) {
@@ -31,7 +32,7 @@ const upload = multer({
 }) 
 
 router.get('/', (req, res) => {
-    res.send('hello there')
+    res.send('added cors')
 })
 
 
@@ -110,7 +111,7 @@ router.get('/api/items', async (req, res) => {
 
 
 //get all items (NEW) (pagination ==> 20 per page)
-router.get('/api/items/all', async (req, res) => {
+router.get('/api/items/all', cors(), async (req, res) => {
     try {
         const page = (req.query.page)
         const category = req.query.category
