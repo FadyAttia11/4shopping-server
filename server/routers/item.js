@@ -30,6 +30,10 @@ const upload = multer({
     fileFilter: fileFilter
 }) 
 
+router.get('/', (req, res) => {
+    res.send('hello there')
+})
+
 
 router.post('/api/items', upload.array('productImages', 50),async (req, res) => {
     let numberOfPhotos = req.files.length;
