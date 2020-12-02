@@ -5,6 +5,8 @@ const router = new express.Router()
 const multer = require('multer')
 const cors = require('cors')
 
+app.use(cors())
+
 const storage = multer.diskStorage({ //to specify where it will stored and what is it's name (the full path)
     destination: function(req, file, cb) {
         cb(null, './uploads/products')
@@ -32,7 +34,7 @@ const upload = multer({
 }) 
 
 router.get('/', (req, res) => {
-    res.send('added cors')
+    res.send('added cors for everything')
 })
 
 
@@ -111,7 +113,7 @@ router.get('/api/items', async (req, res) => {
 
 
 //get all items (NEW) (pagination ==> 20 per page)
-router.get('/api/items/all', cors(), async (req, res) => {
+router.get('/api/items/all', async (req, res) => {
     try {
         const page = (req.query.page)
         const category = req.query.category
