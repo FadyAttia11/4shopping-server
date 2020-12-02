@@ -10,13 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
-    "client": "cd client && npm run start",
     "server": "nodemon server/index --ignore client/",
-    "client-install": "cd client && npm install",
-    "server-install": "npm install",
-    "install-all": "concurrently \"npm run client-install\" \"npm run server-install\"",
-    "all": "concurrently \"npm run server\" \"npm run start  --prefix client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "server-install": "npm install"
   },
   "author": "FadyAttia",
   "license": "ISC",
