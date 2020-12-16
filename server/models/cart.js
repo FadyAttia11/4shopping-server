@@ -36,8 +36,8 @@ const cartSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    productImages: {
-        type: Array
+    productImage: {
+        type: String
     }
 }, {
     timestamps: true
