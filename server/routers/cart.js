@@ -38,10 +38,10 @@ router.patch('/api/cart/:id', auth, async (req, res) => {
 
     if(!isValidOperation) return res.status(400).send({ error: 'invalid updates!' })
 
-    const _id = req.params.id
+    const productId = req.params.id
 
     try {
-        const cart = await Cart.findById(_id)
+        const cart = await Cart.find({ productId })
         if(!cart) return res.status(404).send()
 
         updates.forEach((update) => cart[update] = req.body[update])
