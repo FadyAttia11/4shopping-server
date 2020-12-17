@@ -30,7 +30,7 @@ router.get('/api/cart/getusercart/:id', auth, async (req, res) => {
 })
 
 
-//edit the cart (given the product id)
+//edit the cart (given the productId)
 router.patch('/api/cart/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body) //take all keys and put them into an array
     const allowedUpdates = ['quantity', 'unitPrice', 'totalPrice']
