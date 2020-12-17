@@ -30,7 +30,7 @@ router.get('/api/cart/getusercart/:id', auth, async (req, res) => {
 })
 
 
-//edit the cart (given the productId)
+//edit the cart (given the cart id)
 router.patch('/api/cart/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body) //take all keys and put them into an array
     const allowedUpdates = ['quantity', 'unitPrice', 'totalPrice']
@@ -38,10 +38,10 @@ router.patch('/api/cart/:id', auth, async (req, res) => {
 
     if(!isValidOperation) return res.status(400).send({ error: 'invalid updates!' })
 
-    const productId = req.params.id
+    const _id = req.params.id
 
     try {
-        const cart = await Cart.find({ productId })
+        const cart = await Cart.findById(_id)
         if(!cart) return res.status(404).send()
 
         updates.forEach((update) => cart[update] = req.body[update])
