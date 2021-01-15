@@ -32,20 +32,24 @@ router.get('/api/cart/getusercart/:id', auth, async (req, res) => {
 
 //for edit the cart quantity when having duplicated addtocart from product page (takes productId)
 router.patch('/api/cart/duplicated/:id', auth, async (req, res) => {
-    const updates = Object.keys(req.body) //take all keys and put them into an array
-    const allowedUpdates = ['quantity', 'unitPrice', 'totalPrice']
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+    // const updates = Object.keys(req.body) //take all keys and put them into an array
+    // const allowedUpdates = ['quantity', 'unitPrice', 'totalPrice']
+    // const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
-    if(!isValidOperation) return res.status(400).send({ error: 'invalid updates!' })
+    // if(!isValidOperation) return res.status(400).send({ error: 'invalid updates!' })
 
     const productId = req.params.id
+    const size = req.body.size
+    const color = req.body.color
 
+    
     try {
-        const cart = await Cart.find({ productId })
+        const cart = await Cart.findOne({ productId, size, color })
         if(!cart) return res.status(404).send()
 
-        cart[quantity] += req.body[quantity]
-        // updates.forEach((update) => cart[update] = req.body[update])
+        const updatedQuantity = cart.quantity + parseInt(req.body.quantity)
+        cart.quantity = updatedQuantity
+        
         await cart.save() 
         res.send(cart)
     }catch(e){
